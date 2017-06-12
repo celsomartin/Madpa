@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package madpa.ejecucion;
+package madpa.app;
 
-import madpa.menus.MenuPrincipal;
+import madpa.gui.menu.Principal;
 /**
  *
  * @author Celso
  */
 public class Aplicacion {
     public static void main(String[] args) {
-        MenuPrincipal m = new MenuPrincipal();
+        Principal menu = new Principal();
     }
 }
