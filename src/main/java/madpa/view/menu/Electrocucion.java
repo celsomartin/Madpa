@@ -3,53 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package madpa.gui.menu;
+package madpa.view.menu;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JFrame;
-
-import madpa.gui.panelbasico.Botones;
-
 /**
  *
  * @author Celso
  */
-public class Lesion extends JFrame implements WindowListener, ActionListener{
+public class Electrocucion extends JFrame implements WindowListener{
     
-    private Botones panelTipoLesion;
-    
-    public Lesion() { initComponent(); }
+    private JFrame ventPrin;
+
+    public Electrocucion(JFrame ventPrin) {
+        this.ventPrin = ventPrin;
+        initComponent();
+    }
     
     private void initComponent() {
-    
+        
+        this.ventPrin.setEnabled(false);
         this.addWindowListener(this);
         
-        this.panelTipoLesion = new Botones();
-        
-        this.panelTipoLesion.añadirBoton("Craneo");
-        
-        this.setLocation(new Point(100, 100));
-        this.setMinimumSize(new Dimension(500, 500));
+        this.setTitle("Electrocucion");
         this.getContentPane().setBackground(Color.WHITE);
+        this.setLocation(new Point(200, 100));
+        this.setSize(new Dimension(800, 600));
         this.setVisible(true);
-    
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-    
-        String botonEvento = e.getActionCommand();
-        
-        if (botonEvento.equals("")) {
-            
-        }
-        
     }
     
     @Override
@@ -57,13 +41,13 @@ public class Lesion extends JFrame implements WindowListener, ActionListener{
 
     @Override
     public void windowClosing(WindowEvent e) {
-    
+        
         if (e.getWindow() == this) {
             
-            Principal principal = new Principal();
-            
+            this.setTitle("");
+            this.ventPrin.setEnabled(true);
         }
-    
+        
     }
 
     @Override
@@ -82,5 +66,5 @@ public class Lesion extends JFrame implements WindowListener, ActionListener{
     public void windowDeactivated(WindowEvent e) {}
 
     
-        
+    
 }

@@ -3,68 +3,74 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package madpa.gui.menu;
+package madpa.view.menu;
 
 import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.Insets;
+import java.awt.Dimension;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JFrame;
-import madpa.gui.panelbasico.Etiquetas;
+
+import madpa.logica.panelbasico.Botones;
 
 /**
  *
  * @author Celso
  */
-public class Botiquin extends JFrame implements WindowListener {
+public class Lesion extends JFrame implements WindowListener, ActionListener{
     
-    private Etiquetas panelInformacion;
+    private Botones panelTipoLesion;
+    private JFrame ventPrin;
     
-    public Botiquin() {
-        
-        initComponent();
-        
+    public Lesion(JFrame ventPrin) { 
+        this.ventPrin = ventPrin;
+        initComponent(); 
     }
     
     private void initComponent() {
-        
+    
+        this.ventPrin.setEnabled(false);
         this.addWindowListener(this);
         
-        this.panelInformacion = new Etiquetas();
+        this.panelTipoLesion = new Botones();
         
-        String ruta = "BaseDeDatos\\Barra Herramientas\\Botiquin.txt";
-        this.panelInformacion.crearEtiquetasConURL(ruta);
+        this.panelTipoLesion.añadirBoton("Craneo");
         
-        int numEtiquetas = this.panelInformacion.obtenerNumEtiquetas();
-        this.panelInformacion.generarPanel(new GridLayout(numEtiquetas, 1));
-        
-        this.add(this.panelInformacion);
-
-        this.setTitle("Botiquin");
-        this.getContentPane().setBackground(Color.WHITE);
-        this.pack();
-        this.setResizable(false);
+        this.setTitle("Lesion");
         this.setLocation(new Point(200, 100));
+        this.setSize(new Dimension(800, 600));
+        this.getContentPane().setBackground(Color.WHITE);
         this.setVisible(true);
+    
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+    
+        String botonEvento = e.getActionCommand();
+        
+        if (botonEvento.equals("")) {
+            
+        }
         
     }
     
-  
-
     @Override
     public void windowOpened(WindowEvent e) {}
 
     @Override
     public void windowClosing(WindowEvent e) {
-        
+    
         if (e.getWindow() == this) {
-        
+            
             this.setTitle("");
+            this.ventPrin.setEnabled(true);
             
         }
-        
+    
     }
 
     @Override
@@ -81,5 +87,7 @@ public class Botiquin extends JFrame implements WindowListener {
 
     @Override
     public void windowDeactivated(WindowEvent e) {}
+
     
+        
 }

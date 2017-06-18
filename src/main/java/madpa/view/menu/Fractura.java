@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package madpa.gui.menu;
+package madpa.view.menu;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,41 +11,42 @@ import java.awt.Point;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JFrame;
-import madpa.gui.panelbasico.Botones;
+
 /**
  *
  * @author Celso
  */
-public class Electrocucion extends JFrame implements WindowListener{
+public class Fractura extends JFrame implements WindowListener{
     
+    private JFrame ventPrin;
     
-
-    public Electrocucion() {
+    public Fractura(JFrame ventPrin) {
+        this.ventPrin = ventPrin;
         initComponent();
+        
     }
     
     private void initComponent() {
         
+        this.ventPrin.setEnabled(false);
         this.addWindowListener(this);
         
+        this.setTitle("Fractura");
         this.getContentPane().setBackground(Color.WHITE);
-        this.setLocation(new Point(100, 100));
-        this.setMinimumSize(new Dimension(500, 500));
+        this.setLocation(new Point(200, 100));
+        this.setSize(new Dimension(800, 600));
         this.setVisible(true);
     }
-    
-    @Override
-    public void windowOpened(WindowEvent e) {}
 
     @Override
+    public void windowOpened(WindowEvent e) {}
+    
+    @Override
     public void windowClosing(WindowEvent e) {
-        
         if (e.getWindow() == this) {
-            
-            Principal p = new Principal();
-            
+            this.setTitle("");
+            this.ventPrin.setEnabled(true);
         }
-        
     }
 
     @Override

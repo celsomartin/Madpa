@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package madpa.gui.menu;
+package madpa.view.menu;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import madpa.gui.panelbasico.Botones;
-import madpa.gui.panelbasico.Etiquetas;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import madpa.logica.panelbasico.Botones;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -22,27 +23,27 @@ import javax.swing.JFrame;
  */
 public class Herida extends JFrame implements ActionListener, WindowListener{
     
-    private Etiquetas etiquetaInformacion;
     private Botones panelTipoHerida;
+    private JFrame ventPrin;
     
-    public Herida() {
+    public Herida(JFrame ventana) {
+        this.ventPrin = ventana;
+        this.ventPrin.setEnabled(false);
         initComponent();
     }
     
     private void initComponent() {
-        
-        this.setLayout(new FlowLayout());
-        
+
         this.addWindowListener(this);
                 
         crearPanelTipoHerida();
-        this.add(this.panelTipoHerida);
+        this.add(this.panelTipoHerida, BorderLayout.NORTH);
         
         añadirListeners();
         
         this.setTitle("Herida");
         this.getContentPane().setBackground(Color.WHITE);
-        this.pack();
+        this.setMinimumSize(new Dimension(800, 600));
         this.setLocation(new Point(200, 100));
         this.setVisible(true);
     }
@@ -54,14 +55,14 @@ public class Herida extends JFrame implements ActionListener, WindowListener{
         this.panelTipoHerida.añadirBoton("La herida ha cortado la piel");
         this.panelTipoHerida.añadirBoton("La herida no ha cortado la piel");
         
-        int numTipoHerida = this.panelTipoHerida.obtenerCantidadDeBotones();
-        this.panelTipoHerida.generarPanel(new GridLayout(numTipoHerida, 1));
+        int numTipoHerida = this.panelTipoHerida.obtCantBotones();
+        this.panelTipoHerida.generarPanel(new FlowLayout());
         
     }
     
     private void añadirListeners() {
         
-        int numTipoHeridas = this.panelTipoHerida.obtenerCantidadDeBotones();
+        int numTipoHeridas = this.panelTipoHerida.obtCantBotones();
         
         for (int i = 0; i < numTipoHeridas; i++) {
             
@@ -79,13 +80,11 @@ public class Herida extends JFrame implements ActionListener, WindowListener{
         
         if (botonEvento.equals("La herida ha cortado la piel")) {
             
-            System.out.println("La herida ha cortado la piel");
             
         }
         
         if (botonEvento.equals("La herida no ha cortado la piel")) {
             
-            System.out.println("La herida no ha cortado la piel");
             
         }
     }
@@ -96,9 +95,11 @@ public class Herida extends JFrame implements ActionListener, WindowListener{
     @Override
     public void windowClosing(WindowEvent e) {
         
-        if (e.getWindow() == this)
+        if (e.getWindow() == this) {
             this.setTitle("");
-
+            this.ventPrin.setEnabled(true);
+        }
+        
     }
 
     @Override

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package madpa.gui.menu;
+package madpa.view.menu;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -18,7 +18,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import madpa.gui.panelbasico.Botones;
+import madpa.logica.panelbasico.Botones;
 
 /**
  *
@@ -26,43 +26,53 @@ import madpa.gui.panelbasico.Botones;
  */
 public class Picadura extends JFrame implements WindowListener, ActionListener{
     
-    private Botones panelTipoPicadura;
+    private Botones panelTipoPic;
+    private JFrame ventPrin;
     
-    public Picadura() { initComponent(); }
+    public Picadura(JFrame ventPrin) { 
+        this.ventPrin = ventPrin;
+        initComponent(); 
+    }
     
     private void initComponent() {
         
+        this.ventPrin.setEnabled(false);
         this.addWindowListener(this);
         
-        this.panelTipoPicadura = new Botones();
-        
-        this.panelTipoPicadura.añadirBoton("Alacran");
-        this.panelTipoPicadura.añadirBoton("Zancudo");
-        this.panelTipoPicadura.añadirBoton("Araña de rincon");
-        this.panelTipoPicadura.añadirBoton("Abeja");
-        this.panelTipoPicadura.añadirBoton("Medusa");
-        this.panelTipoPicadura.añadirBoton("Garrapata");
-        
-        this.panelTipoPicadura.establecerColorDeFondo(Color.WHITE);
-        this.panelTipoPicadura.generarPanel(
-                new GridLayout(this.panelTipoPicadura.obtenerCantidadDeBotones(), 1, 1, 10), new Font(Font.SERIF, Font.BOLD, 20)
-        );
-        
-        this.add(this.panelTipoPicadura, BorderLayout.WEST);
+        crearPanelTipoPic();
+        this.add(this.panelTipoPic, BorderLayout.WEST);
         
         añadirListeners();
         
+        this.setTitle("Picadura");
         this.getContentPane().setBackground(Color.WHITE);
-        this.setLocation(new Point(100, 100));
-        this.setMinimumSize(new Dimension(500, 500));
+        this.setLocation(new Point(200, 100));
+        this.setMinimumSize(new Dimension(800, 600));
         this.setVisible(true);
+    }
+    
+    private void crearPanelTipoPic() {
+        
+        this.panelTipoPic = new Botones();
+        
+        this.panelTipoPic.añadirBoton("Alacran");
+        this.panelTipoPic.añadirBoton("Zancudo");
+        this.panelTipoPic.añadirBoton("Araña de rincon");
+        this.panelTipoPic.añadirBoton("Abeja");
+        this.panelTipoPic.añadirBoton("Medusa");
+        this.panelTipoPic.añadirBoton("Garrapata");
+        
+        this.panelTipoPic.setBackground(Color.WHITE);
+        
+        int numFil = this.panelTipoPic.obtCantBotones();
+        this.panelTipoPic.generarPanel(new GridLayout(numFil, 1, 1, 10));
     }
     
     private void añadirListeners() {
         
-        for(int i = 0; i < this.panelTipoPicadura.obtenerCantidadDeBotones(); i++) {
+        for(int i = 0; i < this.panelTipoPic.obtCantBotones(); i++) {
             
-            this.panelTipoPicadura.obtenerBoton(i).addActionListener(this);
+            this.panelTipoPic.obtenerBoton(i).addActionListener(this);
             
         }
         
@@ -76,7 +86,8 @@ public class Picadura extends JFrame implements WindowListener, ActionListener{
         
         if (e.getWindow() == this) {
             
-            Principal p = new Principal();
+            this.setTitle("");
+            this.ventPrin.setEnabled(true);
             
         }
         

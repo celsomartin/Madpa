@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package madpa.gui.menu;
+package madpa.view.menu;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -19,7 +19,7 @@ import java.awt.event.WindowListener;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import madpa.gui.panelbasico.Botones;
+import madpa.logica.panelbasico.Botones;
 
 /**
  *
@@ -27,46 +27,56 @@ import madpa.gui.panelbasico.Botones;
  */
 public class Intoxicacion extends JFrame implements WindowListener, ActionListener{
     
-    private Botones panelTipoIntoxicacion;
-    private BorderLayout distEspacial;
+    private Botones panelTipoIntox;
+    private JFrame ventPrin;
 
-    public Intoxicacion() {
-        
+    public Intoxicacion(JFrame ventPrin) {
+        this.ventPrin = ventPrin;
         initComponent();
         
     }
     
     private void initComponent() {
         
+        this.ventPrin.setEnabled(false);
         this.addWindowListener(this);
-        this.setLayout(this.distEspacial);
         
-        this.panelTipoIntoxicacion = new Botones();
-        
-        this.panelTipoIntoxicacion.añadirBoton("Alcohol");
-        this.panelTipoIntoxicacion.añadirBoton("Alimetos");
-        this.panelTipoIntoxicacion.añadirBoton("Monoxido de Carbono(CO)");
-        this.panelTipoIntoxicacion.añadirBoton("Hongo o setas");
-        this.panelTipoIntoxicacion.añadirBoton("Insecticidas");
-        this.panelTipoIntoxicacion.añadirBoton("Sobre dosis de droga");
-        
-        this.panelTipoIntoxicacion.generarPanel(new BoxLayout(this.panelTipoIntoxicacion.obtenerPanel(), BoxLayout.Y_AXIS));
+        crearPanelTipoIntox();
+        this.add(this.panelTipoIntox, BorderLayout.CENTER);
         
         añadirListeners();
         
-        this.add(this.panelTipoIntoxicacion, BorderLayout.EAST);
         
+        
+        this.setTitle("Intoxicacion");
         this.getContentPane().setBackground(Color.WHITE);
-        this.setLocation(new Point(100, 100));
-        this.setMinimumSize(new Dimension(500, 500));
+        this.setLocation(new Point(200, 100));
+        this.setSize(new Dimension(800, 600));
         this.setVisible(true);
     }
     
+    private void crearPanelTipoIntox() {
+        
+        this.panelTipoIntox = new Botones();
+        
+        this.panelTipoIntox.añadirBoton("Alcohol");
+        this.panelTipoIntox.añadirBoton("Alimetos");
+        this.panelTipoIntox.añadirBoton("Monoxido de Carbono(CO)");
+        this.panelTipoIntox.añadirBoton("Hongo o setas");
+        this.panelTipoIntox.añadirBoton("Insecticidas");
+        this.panelTipoIntox.añadirBoton("Sobre dosis de droga");
+        
+        int numFil = this.panelTipoIntox.obtCantBotones();
+        this.panelTipoIntox.generarPanel(new FlowLayout());
+        
+    }
+            
+    
     private void añadirListeners() {
         
-        for (int i = 0; i < this.panelTipoIntoxicacion.obtenerCantidadDeBotones(); i++) {
+        for (int i = 0; i < this.panelTipoIntox.obtCantBotones(); i++) {
             
-            this.panelTipoIntoxicacion.obtenerBoton(i).addActionListener(this);
+            this.panelTipoIntox.obtenerBoton(i).addActionListener(this);
             
         }
         
@@ -109,7 +119,8 @@ public class Intoxicacion extends JFrame implements WindowListener, ActionListen
     @Override
     public void windowClosing(WindowEvent e) {
         if (e.getWindow() == this) {
-            Principal p = new Principal();
+            this.setTitle("");
+            this.ventPrin.setEnabled(true);
         }
         
     }

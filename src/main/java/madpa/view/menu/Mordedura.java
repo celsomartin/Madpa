@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package madpa.gui.menu;
+package madpa.view.menu;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JFrame;
-import madpa.gui.panelbasico.Botones;
+import madpa.logica.panelbasico.Botones;
 
 /**
  *
@@ -22,42 +22,44 @@ import madpa.gui.panelbasico.Botones;
  */
 public class Mordedura extends JFrame implements WindowListener, ActionListener{
     
-    private Botones panelTipoMordedura;
+    private Botones panelTipoMor;
+    private JFrame ventPrin;
     
-    public Mordedura() {
-        
+    public Mordedura(JFrame ventPrin) {
+        this.ventPrin = ventPrin;
         initComponent();
         
     }
     
     private void initComponent() {
         
+        this.ventPrin.setEnabled(false);
         this.addWindowListener(this);
         
-        this.panelTipoMordedura = new Botones();
+        this.panelTipoMor = new Botones();
         
-        this.panelTipoMordedura.añadirBoton("Perro");
-        this.panelTipoMordedura.añadirBoton("Raton");
-        this.panelTipoMordedura.añadirBoton("Serpiente");
-        this.panelTipoMordedura.añadirBoton("Murcielago");
+        this.panelTipoMor.añadirBoton("Perro");
+        this.panelTipoMor.añadirBoton("Raton");
+        this.panelTipoMor.añadirBoton("Serpiente");
+        this.panelTipoMor.añadirBoton("Murcielago");
         
-        this.panelTipoMordedura.generarPanel(
-                new GridLayout(this.panelTipoMordedura.obtenerCantidadDeBotones(), 1, 1, 10)
-        );
+        int numFil = this.panelTipoMor.obtCantBotones();
+        this.panelTipoMor.generarPanel(new GridLayout(numFil, 1, 1, 10));
         
         añadirListeners();
         
+        this.setTitle("Mordedura");
         this.getContentPane().setBackground(Color.WHITE);
-        this.setLocation(new Point(100, 100));
-        this.setMinimumSize(new Dimension(500, 500));
+        this.setLocation(new Point(200, 100));
+        this.setSize(new Dimension(800, 600));
         this.setVisible(true);
     }
     
     private void añadirListeners() {
         
-        for (int i = 0; i < this.panelTipoMordedura.obtenerCantidadDeBotones(); i++) {
+        for (int i = 0; i < this.panelTipoMor.obtCantBotones(); i++) {
             
-            this.panelTipoMordedura.obtenerBoton(i).addActionListener(this);
+            this.panelTipoMor.obtenerBoton(i).addActionListener(this);
             
         }
         
@@ -93,7 +95,8 @@ public class Mordedura extends JFrame implements WindowListener, ActionListener{
     public void windowClosing(WindowEvent e) {
     
         if (e.getWindow() == this) {
-            Principal p = new Principal();
+            this.setTitle("");
+            this.ventPrin.setEnabled(true);
         }
     }
 

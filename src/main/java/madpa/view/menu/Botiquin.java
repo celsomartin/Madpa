@@ -3,27 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package madpa.gui.menu;
+package madpa.view.menu;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JFrame;
-import madpa.gui.panelbasico.Botones;
+import javax.swing.SwingConstants;
+import madpa.logica.panelbasico.Etiquetas;
 
 /**
  *
  * @author Celso
  */
-public class Sintomas extends JFrame implements WindowListener, ActionListener{
+public class Botiquin extends JFrame implements WindowListener {
     
-    private Botones panelTiposSintomas;
+    private Etiquetas panelInformacion;
+    private JFrame venPrin;
     
-    public Sintomas() {
-        
+    public Botiquin(JFrame venPrin) {
+        this.venPrin = venPrin;
+        this.venPrin.setEnabled(false);
         initComponent();
         
     }
@@ -32,34 +35,38 @@ public class Sintomas extends JFrame implements WindowListener, ActionListener{
         
         this.addWindowListener(this);
         
-        this.panelTiposSintomas = new Botones();
+        this.panelInformacion = new Etiquetas();
         
-        this.panelTiposSintomas.añadirBoton("Zika");
+        String ruta = "BaseDeDatos\\Barra de herramientas\\Botiquin.txt";
+        this.panelInformacion.crearEtiquetasConURL(ruta, SwingConstants.CENTER);
         
-        this.setMinimumSize(new Dimension(500, 500));
-        this.setLocation(new Point(100, 100));
+        int numFil = this.panelInformacion.obtNumEtiquetas();
+        this.panelInformacion.generarPanel(new GridLayout(numFil, 1));
+        
+        this.add(this.panelInformacion);
+
+        this.setTitle("Botiquin");
+        this.getContentPane().setBackground(Color.WHITE);
+        this.setSize(new Dimension(800, 600));
+        this.setLocation(new Point(200, 100));
         this.setVisible(true);
         
     }
+    
+  
 
     @Override
     public void windowOpened(WindowEvent e) {}
 
     @Override
     public void windowClosing(WindowEvent e) {
-    
+        
         if (e.getWindow() == this) {
-            
-            Principal principal = new Principal();
+        
+            this.setTitle("");
             
         }
-    
-    }
-    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-    
-        
+        this.venPrin.setEnabled(true);
         
     }
 
@@ -77,6 +84,5 @@ public class Sintomas extends JFrame implements WindowListener, ActionListener{
 
     @Override
     public void windowDeactivated(WindowEvent e) {}
-
     
 }

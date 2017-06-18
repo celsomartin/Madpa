@@ -3,21 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package madpa.gui.menu;
+package madpa.view.menu;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JFrame;
-import madpa.gui.panelbasico.Botones;
-import madpa.gui.panelbasico.Etiquetas;
+import javax.swing.SwingConstants;
+import madpa.logica.excepcion.ErrorGestionArchivoException;
+import madpa.logica.panelbasico.Botones;
+import madpa.logica.panelbasico.Etiquetas;
 
 /**
  *
@@ -26,26 +30,29 @@ import madpa.gui.panelbasico.Etiquetas;
 public class Alergia extends JFrame implements WindowListener, ActionListener {
     
     private Botones panelTipoAlergia;
+    private Etiquetas panelSup;
     private Etiquetas panelHiedraVenenosa;
     private Etiquetas panelPasto;
     private Etiquetas panelOcular;
     private Etiquetas panelTintaPelo;
     private Etiquetas panelLatex;
-    private boolean instruccionAñadida;
+    private ArrayList<Etiquetas> instAñad;
+    private JFrame ventPrin;
     
-    public Alergia() {
-        
+    public Alergia(JFrame ventPrin) {
+        this.instAñad = new ArrayList<>();
+        this.ventPrin = ventPrin;
         initComponent();
         
     }
     
     private void initComponent() {
         
-        this.instruccionAñadida = false;
+        this.ventPrin.setEnabled(false);
         this.addWindowListener(this);
         
         crearPanelTipoAlergia();
-        this.add(this.panelTipoAlergia, BorderLayout.WEST);
+        this.add(this.panelTipoAlergia, BorderLayout.NORTH);
         
         crearPanelHiedraVenenosa();
         this.panelHiedraVenenosa.setVisible(false);
@@ -56,14 +63,44 @@ public class Alergia extends JFrame implements WindowListener, ActionListener {
         crearPanelPasto(); 
         this.panelPasto.setVisible(false);
         
+        crearPanelLatex();
+        this.panelLatex.setVisible(false);
+        
+        crearPanelTintaPelo();
+        this.panelTintaPelo.setVisible(false);
         
         añadirListeners();
         
         this.setTitle("Alergia");
         this.getContentPane().setBackground(Color.WHITE);
         this.setLocation(new Point(200, 100));
-        this.setSize(new Dimension(700, 400));
+        this.setSize(new Dimension(800, 600));
         this.setVisible(true);
+        
+    }
+    
+    private void crearPanelTintaPelo() {
+        
+        this.panelTintaPelo = new Etiquetas();
+        
+        String ruta = "BaseDeDatos\\Alergia\\Tinta de pelo.txt";
+        
+        this.panelTintaPelo.crearEtiquetasConURL(ruta, SwingConstants.CENTER);
+        
+        int numFil = this.panelTintaPelo.obtNumEtiquetas();
+        this.panelHiedraVenenosa.generarPanel(new GridLayout(numFil, 1));
+        
+    }
+    
+    private void crearPanelLatex() {
+        
+        this.panelLatex = new Etiquetas();
+        
+        String ruta = "BaseDeDatos\\Alergia\\Latex.txt";
+        this.panelLatex.crearEtiquetasConURL(ruta, SwingConstants.CENTER);
+        
+        int numFil = this.panelLatex.obtNumEtiquetas();
+        this.panelLatex.generarPanel(new GridLayout(numFil, 1));
         
     }
     
@@ -71,10 +108,11 @@ public class Alergia extends JFrame implements WindowListener, ActionListener {
         
         this.panelPasto = new Etiquetas();
         
-        this.panelPasto.crearEtiquetasConURL("BaseDeDatos\\Alergia\\Pasto.txt");
+        String ruta = "BaseDeDatos\\Alergia\\Pasto.txt";
+        this.panelPasto.crearEtiquetasConURL(ruta, SwingConstants.CENTER);
         
-        int numEtiquetas = this.panelPasto.obtenerNumEtiquetas();
-        this.panelPasto.generarPanel(new GridLayout(numEtiquetas, 1));
+        int numFil = this.panelPasto.obtNumEtiquetas();
+        this.panelPasto.generarPanel(new GridLayout(numFil, 1));
         
     }
     
@@ -82,23 +120,27 @@ public class Alergia extends JFrame implements WindowListener, ActionListener {
         
         this.panelTipoAlergia = new Botones();
         
-        this.panelTipoAlergia.añadirBoton("Hiedra venenosa");
-        this.panelTipoAlergia.añadirBoton("Latex");
-        this.panelTipoAlergia.añadirBoton("Tinta de pelo");
-        this.panelTipoAlergia.añadirBoton("Alimento");
-        this.panelTipoAlergia.añadirBoton("Ocular");
-        this.panelTipoAlergia.añadirBoton("Pasto");
-        this.panelTipoAlergia.añadirBoton("Animales");
+        String ruta = "BaseDeDatos\\Componentes\\Botones\\Menu alergia.txt";
         
-        int numTipoAlergia = this.panelTipoAlergia.obtenerCantidadDeBotones();
-        this.panelTipoAlergia.generarPanel(
-                new GridLayout(numTipoAlergia, 1, 1, 10));
+        try {
+            
+            this.panelTipoAlergia.crearBotonesConURL(ruta);
+            int numFil = this.panelTipoAlergia.obtCantBotones();
+            this.panelTipoAlergia.generarPanel(new FlowLayout());
+            
+        } catch (IOException errorES) {
+            
+            ErrorGestionArchivoException.lanzarMensaje();
+            
+        }
+        
+        
         
     }
     
     private void añadirListeners() {
         
-        for (int i = 0; i < this.panelTipoAlergia.obtenerCantidadDeBotones(); i++)    
+        for (int i = 0; i < this.panelTipoAlergia.obtCantBotones(); i++)    
             this.panelTipoAlergia.obtenerBoton(i).addActionListener(this);
         
     }
@@ -107,11 +149,12 @@ public class Alergia extends JFrame implements WindowListener, ActionListener {
         
         this.panelHiedraVenenosa = new Etiquetas();
         
-        this.panelHiedraVenenosa.
-                crearEtiquetasConURL("BaseDeDatos\\Alergia\\Hiedra venenosa.txt");
+        String ruta = "BaseDeDatos\\Alergia\\Hiedra venenosa.txt";
+        this.panelHiedraVenenosa.crearEtiquetasConURL(
+                ruta, SwingConstants.CENTER);
         
-        int numEtiquetas = this.panelHiedraVenenosa.obtenerNumEtiquetas();
-        this.panelHiedraVenenosa.generarPanel(new GridLayout(numEtiquetas, 1));
+        int numFil = this.panelHiedraVenenosa.obtNumEtiquetas();
+        this.panelHiedraVenenosa.generarPanel(new GridLayout(numFil, 1));
         
     }
     
@@ -119,20 +162,27 @@ public class Alergia extends JFrame implements WindowListener, ActionListener {
         
         this.panelOcular = new Etiquetas();
         
-        this.panelOcular.crearEtiquetasConURL(
-                "BaseDeDatos\\Alergia\\Ocular.txt");
+        String ruta = "BaseDeDatos\\Alergia\\Ocular.txt"; 
+        this.panelOcular.crearEtiquetasConURL(ruta, SwingConstants.CENTER);
         
-        int numInstruccionesOcular = this.panelOcular.obtenerNumEtiquetas();
-        this.panelOcular.generarPanel(
-                new GridLayout(numInstruccionesOcular, 1));
+        int numFil = this.panelOcular.obtNumEtiquetas();
+        this.panelOcular.generarPanel(new GridLayout(numFil, 1));
         
     }
     
-    private void removerInstrucciones() {
+    private void removerInstruccion() {
         
-        for (int i = 0; i < this.getComponentCount(); i++) {
+        for (int i = 0; i < this.getContentPane().getComponentCount(); i++) {
             
-            
+            for (int j = 0; j < this.instAñad.size(); j++) {
+                
+                if (this.getContentPane().getComponent(i) == this.instAñad.get(j)) {
+                    this.getContentPane().getComponent(i).setVisible(false);
+                    this.getContentPane().remove(this.getContentPane().getComponent(i));
+                    this.instAñad.clear();
+                }
+                
+            }
             
         }
         
@@ -143,6 +193,9 @@ public class Alergia extends JFrame implements WindowListener, ActionListener {
      
         String botonEvento = e.getActionCommand();
         Etiquetas panelTemporal = null;
+        if (!this.instAñad.isEmpty()) {
+            removerInstruccion();
+        }
         
         if (botonEvento.equals("Hiedra venenosa")) {
             
@@ -168,10 +221,6 @@ public class Alergia extends JFrame implements WindowListener, ActionListener {
             
         }
         
-        if (botonEvento.equals("Alimentos")) {
-            
-        }
-        
         if (botonEvento.equals("Ocular")) {
             
             panelTemporal = this.panelOcular;
@@ -188,11 +237,7 @@ public class Alergia extends JFrame implements WindowListener, ActionListener {
             
         }
         
-        if (botonEvento.equals("Animales")) {
-            
-        }
-        
-        
+        this.instAñad.add(panelTemporal);
         
     }
 
@@ -205,6 +250,7 @@ public class Alergia extends JFrame implements WindowListener, ActionListener {
         if (e.getWindow() == this) 
             this.setTitle("");
             
+        this.ventPrin.setEnabled(true);
     }
     
     @Override
