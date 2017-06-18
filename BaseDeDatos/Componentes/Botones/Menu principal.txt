@@ -1,0 +1,9 @@
+Alergia
+Electrocucion
+Fractura
+Herida
+Intoxicacion
+Lesion
+Mordedura
+Picadura
+Quemadura

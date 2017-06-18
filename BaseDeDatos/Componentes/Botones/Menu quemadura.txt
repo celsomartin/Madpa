@@ -1,0 +1,7 @@
+Primer grado
+Segundo grado
+Tercer grado
+Electrica
+Solar
+Quimica
+Congelacion
