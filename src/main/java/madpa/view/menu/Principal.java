@@ -17,6 +17,7 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -34,16 +35,21 @@ public class Principal extends JFrame implements ActionListener {
     private BarraDeHerramientas panelBarraHerramientas;
     private Botones panelTipoAccidente;
     private Etiquetas panelSaludo;
-    private Etiquetas panelSeñaladorAcc;
+    private Etiquetas panelInf;
+    private ImageIcon icono;
     
     public Principal() { initComponent(); }
 
     private void initComponent() {
-        setLookAndFeel();
-//        
-//        crearPanelSeñaladorAcc();
-//        this.add(this.panelSeñaladorAcc, BorderLayout.BEFORE_FIRST_LINE);
         
+        setLookAndFeel();
+        
+        crearIcono();
+        this.setIconImage(this.icono.getImage());
+        
+        crearPanelInf();
+        this.add(this.panelInf, BorderLayout.SOUTH);
+
         crearPanelBarraHerramientas();
         this.setJMenuBar(this.panelBarraHerramientas.obtenerJMenuBar());
         
@@ -63,12 +69,22 @@ public class Principal extends JFrame implements ActionListener {
         this.setVisible(true);
     }
     
-    private void crearPanelSeñaladorAcc() {
+    private void crearPanelInf() {
         
-        this.panelSeñaladorAcc = new Etiquetas();
+        this.panelInf = new Etiquetas();
         
-        this.panelSeñaladorAcc.añadirEtiqueta("Tipo Accidente: ");
-        this.panelSeñaladorAcc.generarPanel(new FlowLayout());
+        String ruta = "BaseDeDatos\\No olvidar.txt";
+        this.panelInf.crearEtiquetasConURL(ruta, SwingConstants.CENTER);
+        
+        int numFil = this.panelInf.obtNumEtiquetas();
+        this.panelInf.generarPanel(new GridLayout(numFil, 1), Color.CYAN);
+        
+    }
+    
+    private void crearIcono() {
+        
+        String ruta = "BaseDeDatos\\Imagenes\\Icono menu principal.png";
+        this.icono = new ImageIcon(ruta);
         
     }
     
@@ -78,7 +94,10 @@ public class Principal extends JFrame implements ActionListener {
         
         this.panelSaludo.añadirEtiqueta("Bienvenido", SwingConstants.CENTER);
         this.panelSaludo.añadirEtiqueta(
-                "Por favor, seleccione el tipo de accidente"
+                "Por favor, seleccione un tipo de accidente"
+                , SwingConstants.CENTER);
+        this.panelSaludo.añadirEtiqueta(
+                "Posteriormente, repita la misma accion"
                 , SwingConstants.CENTER);
         
         int numFil = this.panelSaludo.obtNumEtiquetas();
@@ -97,9 +116,7 @@ public class Principal extends JFrame implements ActionListener {
             this.panelTipoAccidente.crearBotonesConURL(ruta);
             this.panelTipoAccidente.estabCursor(new Cursor(Cursor.HAND_CURSOR));
         
-            int numTipoAccidente = this.panelTipoAccidente.obtCantBotones();
             this.panelTipoAccidente.generarPanel(new FlowLayout());
-            
             
         } catch (IOException errorES) {
             
@@ -118,13 +135,11 @@ public class Principal extends JFrame implements ActionListener {
         this.panelBarraHerramientas.añadirMenu("Inicio");
         this.panelBarraHerramientas.añadirMenu("Consejos");
         
-        this.panelBarraHerramientas.añadirItem("Botiquin", "Inicio");
-        this.panelBarraHerramientas.añadirItem("Sintomas", "Inicio");
-        this.panelBarraHerramientas.añadirItem("Recomendaciones", "Inicio");
-        this.panelBarraHerramientas.añadirItem("Signos vitales", "Inicio");
+        this.panelBarraHerramientas.añadirItem("Que debe contener un Botiquin", "Inicio");
+        this.panelBarraHerramientas.añadirItem("Sintomas de enfermedades comunes", "Inicio");
+        this.panelBarraHerramientas.añadirItem("Donde se puede tomar los signos vitales", "Inicio");
         
-        this.panelBarraHerramientas.añadirItem("Evitar Accidentes", "Consejos");
-        this.panelBarraHerramientas.añadirItem("Tomar pulsos", "Consejos");
+        this.panelBarraHerramientas.añadirItem("Como evitar algunos accidentes", "Consejos");
         
         this.panelBarraHerramientas.establecerColorDeFondoBarra(Color.WHITE);
         this.panelBarraHerramientas.establecerColorDeFondoItems(Color.WHITE);
@@ -163,68 +178,69 @@ public class Principal extends JFrame implements ActionListener {
         //Botones del menu principal
         if (botonEvento.equals("Herida")) {
             
-            Herida herida = new Herida(this);
+            Herida herida = new Herida(this, this.icono);
             
         }
         
         if (botonEvento.equals("Alergia")) {
             
-            Alergia alergia = new Alergia(this);
+            Alergia alergia = new Alergia(this, this.icono);
 
         }
         
         if (botonEvento.equals("Fractura")) {
             
-            Fractura fractura = new Fractura(this);
+            Fractura fractura = new Fractura(this, this.icono);
                 
         }
-        
-        if (botonEvento.equals("Quemadura")) {
-            
-            Quemadura quemadura = new Quemadura(this);
-            
-        }
-        
-        if (botonEvento.equals("Electrocucion")) {
-            
-            Electrocucion electrocucion = new Electrocucion(this);
-              
-        }
+
         
         if (botonEvento.equals("Intoxicacion")) {
             
-            Intoxicacion intox = new Intoxicacion(this);
+            Intoxicacion intox = new Intoxicacion(this, this.icono);
               
         }
         
         if (botonEvento.equals("Picadura")) {
             
-            Picadura picadura = new Picadura(this);
+            Picadura picadura = new Picadura(this, this.icono);
                 
         }
         
         if (botonEvento.equals("Mordedura")) {
             
-            Mordedura mordedura = new Mordedura(this);
+            Mordedura mordedura = new Mordedura(this, this.icono);
               
         }
         
         if (botonEvento.equals("Lesion")) {
             
-            Lesion lesion = new Lesion(this);
+            Lesion lesion = new Lesion(this, this.icono);
                 
         }
         
         //Opciones de la barra de herramientas
-        if (botonEvento.equals("Botiquin")) {
+        if (botonEvento.equals("Que debe contener un Botiquin")) {
             
-            Botiquin botiquin = new Botiquin(this);
+            Botiquin botiquin = new Botiquin(this, this.icono);
             
         }
         
-        if (botonEvento.equals("Sintomas")) {
+        if (botonEvento.equals("Sintomas de enfermedades comunes")) {
             
+            Sintomas sint = new Sintomas(this, this.icono);
             
+        }
+        
+        if (botonEvento.equals("Como evitar algunos accidentes")) {
+            
+            EvitarAccidente evitAcc = new EvitarAccidente(this, this.icono);
+            
+        }
+        
+        if (botonEvento.equals("Donde se puede tomar los signos vitales")) {
+            
+            SignosVitales sigVit = new SignosVitales(this, this.icono);
             
         }
         

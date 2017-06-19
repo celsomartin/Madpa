@@ -1,0 +1,17 @@
+Temperatura
+*Colocar el termómetro debajo de la lengua para tomar la tempratura oral unicamente si el paciente
+tiene como mínimo 5 años de edad, está consciente, lúcido, es capaz de respirar por la nairz
+y no tine una lesión facial.
+
+Pulso
+*Se recomienda no usar el dedo pulgar para buscar el pulso, ya que probablemente sentirá su propio pulso
+en vez del paciente.
+*Usando sus dedos presione contra la parte ósea de la muñeca del paciente. Pero teniendo cuidado de presionar
+muy fuerte.
+
+Respiracion
+*Se recomienda no dar aviso al paciente de que se le está tomando la respiracion, ya que probablemente éste
+cambie la frecuencia de su respiración.
+*Cuente la cantidad de inhalaciones que ocurren en 15 segundos, luego multipliquelo por 4 para obtener
+la frecuencia respiratoria.
+*La respiracion normal es entre 14 y 20 por minuto.

@@ -5,7 +5,7 @@
  */
 package madpa.app;
 
-import madpa.gui.menu.Principal;
+import madpa.view.menu.Principal;
 /**
  *
  * @author Celso

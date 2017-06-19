@@ -11,6 +11,7 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 import madpa.logica.panelbasico.Etiquetas;
@@ -24,7 +25,8 @@ public class Botiquin extends JFrame implements WindowListener {
     private Etiquetas panelInformacion;
     private JFrame venPrin;
     
-    public Botiquin(JFrame venPrin) {
+    public Botiquin(JFrame venPrin, ImageIcon icono) {
+        this.setIconImage(icono.getImage());
         this.venPrin = venPrin;
         this.venPrin.setEnabled(false);
         initComponent();
@@ -37,7 +39,7 @@ public class Botiquin extends JFrame implements WindowListener {
         
         this.panelInformacion = new Etiquetas();
         
-        String ruta = "BaseDeDatos\\Barra de herramientas\\Botiquin.txt";
+        String ruta = "BaseDeDatos\\Barra de herramientas\\Inicio\\Botiquin.txt";
         this.panelInformacion.crearEtiquetasConURL(ruta, SwingConstants.CENTER);
         
         int numFil = this.panelInformacion.obtNumEtiquetas();

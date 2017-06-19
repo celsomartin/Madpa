@@ -119,6 +119,7 @@ public class Etiquetas extends JPanel{
     }
     
     public void añadirEtiqueta(String texto) {
+        
         JLabel e = new JLabel(texto);
         e.setName(texto);
         this.listaEtiquetas.add(e);

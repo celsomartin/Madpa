@@ -17,6 +17,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 import madpa.logica.excepcion.ErrorGestionArchivoException;
@@ -39,7 +40,8 @@ public class Alergia extends JFrame implements WindowListener, ActionListener {
     private ArrayList<Etiquetas> instAñad;
     private JFrame ventPrin;
     
-    public Alergia(JFrame ventPrin) {
+    public Alergia(JFrame ventPrin, ImageIcon icono) {
+        this.setIconImage(icono.getImage());
         this.instAñad = new ArrayList<>();
         this.ventPrin = ventPrin;
         initComponent();
@@ -88,7 +90,7 @@ public class Alergia extends JFrame implements WindowListener, ActionListener {
         this.panelTintaPelo.crearEtiquetasConURL(ruta, SwingConstants.CENTER);
         
         int numFil = this.panelTintaPelo.obtNumEtiquetas();
-        this.panelHiedraVenenosa.generarPanel(new GridLayout(numFil, 1));
+        this.panelTintaPelo.generarPanel(new GridLayout(numFil, 1));
         
     }
     
