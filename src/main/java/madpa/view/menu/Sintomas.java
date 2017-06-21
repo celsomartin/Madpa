@@ -33,7 +33,6 @@ public class Sintomas extends JFrame implements WindowListener, ActionListener{
     
     private Botones panelTipoSint;
     private JFrame ventPrin;
-    private Etiquetas panelSup;
     private Etiquetas panelColera;
     private Etiquetas panelDengue;
     private Etiquetas panelHanta;
@@ -185,17 +184,6 @@ public class Sintomas extends JFrame implements WindowListener, ActionListener{
         
         int numFil = this.panelZika.obtNumEtiquetas();
         this.panelZika.generarPanel(new GridLayout(numFil, 1));
-        
-    }
-    
-    private void crearPanelSup() {
-        
-        this.panelSup = new Etiquetas();
-        
-        this.panelSup.añadirEtiqueta(
-                "Por favor, seleccione un tipo de sintoma: ");
-        
-        this.panelSup.generarPanel(new FlowLayout(), Color.GREEN);
         
     }
     

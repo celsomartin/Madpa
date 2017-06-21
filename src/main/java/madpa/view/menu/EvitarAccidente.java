@@ -82,10 +82,7 @@ public class EvitarAccidente extends JFrame implements WindowListener, ActionLis
         this.setVisible(true);
     }
     
-    
-    
-    
-       private void crearPanelTransito(){
+    private void crearPanelTransito(){
         this.panelTransito=new Etiquetas();
         
         String ruta ="BaseDeDatos\\Barra de herramientas\\Consejos\\Evitar accidentes\\Accidente de transito.txt";
@@ -165,7 +162,7 @@ public class EvitarAccidente extends JFrame implements WindowListener, ActionLis
         this.panelInfarto.generarPanel(new GridLayout(numFil,1));
     }
     
-     private void crearPanelEvitarAccidente() {
+    private void crearPanelEvitarAccidente() {
         
         this.panelEvitarAccidente = new Botones();
         
@@ -190,7 +187,7 @@ public class EvitarAccidente extends JFrame implements WindowListener, ActionLis
 
     }
       
-      private void removerInstruccion() {
+    private void removerInstruccion() {
         
         for (int i = 0; i < this.getContentPane().getComponentCount(); i++) {
             

@@ -72,7 +72,7 @@ public class Lesion extends JFrame implements WindowListener, ActionListener{
     
     }
     
-       private void crearPanelCalambres(){
+    private void crearPanelCalambres(){
         this.panelCalambres=new Etiquetas();
         
         String ruta ="BaseDeDatos\\Lesion\\Calambres.txt";
@@ -82,7 +82,7 @@ public class Lesion extends JFrame implements WindowListener, ActionListener{
         this.panelCalambres.generarPanel(new GridLayout(numFil,1));
     }
     
-       private void crearPanelDislocacionHueso(){
+    private void crearPanelDislocacionHueso(){
         this.panelDislocacionHueso=new Etiquetas();
         
         String ruta ="BaseDeDatos\\Lesion\\Dislocacion de un hueso.txt";
@@ -92,7 +92,7 @@ public class Lesion extends JFrame implements WindowListener, ActionListener{
         this.panelDislocacionHueso.generarPanel(new GridLayout(numFil,1));
     }
     
-       private void crearPanelLuxacionMuscular(){
+    private void crearPanelLuxacionMuscular(){
         this.panelLuxacionMuscular=new Etiquetas();
         
         String ruta ="BaseDeDatos\\Lesion\\Luxacion muscular.txt";
@@ -102,7 +102,7 @@ public class Lesion extends JFrame implements WindowListener, ActionListener{
         this.panelLuxacionMuscular.generarPanel(new GridLayout(numFil,1));
     }
     
-       private void crearPanelRoturaLigamentos(){
+    private void crearPanelRoturaLigamentos(){
         this.panelRoturaLigamentos=new Etiquetas();
         
         String ruta ="BaseDeDatos\\Lesion\\Rotura de ligamentos.txt";
@@ -111,8 +111,8 @@ public class Lesion extends JFrame implements WindowListener, ActionListener{
         int numFil=this.panelRoturaLigamentos.obtNumEtiquetas();
         this.panelRoturaLigamentos.generarPanel(new GridLayout(numFil,1));
     }
-    
-         private void crearPanelTorceduraPie(){
+
+    private void crearPanelTorceduraPie(){
         this.panelTorceduraPie=new Etiquetas();
         
         String ruta ="BaseDeDatos\\Lesion\\Torcedura de pie.txt";
@@ -123,7 +123,7 @@ public class Lesion extends JFrame implements WindowListener, ActionListener{
     }
          
          
-      private void crearPanelTipoLesion() {
+    private void crearPanelTipoLesion() {
         
         this.panelTipoLesion = new Botones();
         
@@ -137,7 +137,7 @@ public class Lesion extends JFrame implements WindowListener, ActionListener{
         
     }
       
-     private void añadirListeners() {
+    private void añadirListeners() {
         
         for (int i = 0; i < this.panelTipoLesion.obtCantBotones(); i++) {
             
@@ -147,7 +147,7 @@ public class Lesion extends JFrame implements WindowListener, ActionListener{
         
     }
      
-      private void removerInstruccion() {
+    private void removerInstruccion() {
         
         for (int i = 0; i < this.getContentPane().getComponentCount(); i++) {
             

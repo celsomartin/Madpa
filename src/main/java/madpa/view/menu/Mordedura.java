@@ -69,7 +69,7 @@ public class Mordedura extends JFrame implements WindowListener, ActionListener{
         this.setVisible(true);
     }
     
-     private void crearPanelTipoMordedura() {
+    private void crearPanelTipoMordedura() {
         this.panelTipoMordedura = new Botones();
         
         this.panelTipoMordedura.añadirBoton("Perro");

@@ -66,9 +66,9 @@ public class Botiquin extends JFrame implements WindowListener {
         if (e.getWindow() == this) {
         
             this.setTitle("");
-            
+            this.venPrin.setEnabled(true);
         }
-        this.venPrin.setEnabled(true);
+        
         
     }
 

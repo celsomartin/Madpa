@@ -230,18 +230,4 @@ public class BarraDeHerramientas extends JPanel{
         
     }
     
-    public void establecerFuentePredeterminada(Font fuente) {
-        
-         for (int i = 0; i < this.barra.getMenuCount(); i++) {
-            
-            for (int j = 0; j < this.barra.getMenu(i).getItemCount(); j++) {
-                
-                this.barra.getMenu(i).setFont(fuente);
-                this.barra.getMenu(i).getItem(j).setFont(fuente);
-                
-            }
-            
-        }
-        
-    }
 }

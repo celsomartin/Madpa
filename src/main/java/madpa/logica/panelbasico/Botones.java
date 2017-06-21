@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import madpa.logica.gestor.archivo.Archivo;
+import madpa.logica.gestor.Archivo;
 
 /**
  *
@@ -23,15 +23,13 @@ import madpa.logica.gestor.archivo.Archivo;
 public class Botones extends JPanel{
     
     private ArrayList<JButton> listaBotones;
-    private Dimension tamañoBoton;
     
     public Botones() {
         initComponent();
     }
 
     private void initComponent() {
-        
-        this.tamañoBoton = null;
+
         this.listaBotones = new ArrayList<>();
     }
     
@@ -44,9 +42,6 @@ public class Botones extends JPanel{
             
             for (int i = 0; i < this.listaBotones.size(); i++) {
                 
-                if (this.tamañoBoton != null)
-                    this.listaBotones.get(i).setPreferredSize(this.tamañoBoton);
-                    
                 this.listaBotones.get(i).setActionCommand(this.listaBotones.get(i).getText());
                 this.add(this.listaBotones.get(i));
                 
@@ -61,36 +56,6 @@ public class Botones extends JPanel{
         return this;
     }
     
-    public void generarPanel(LayoutManager tipoDistribucion, Font fuente) {
-        
-        if (tipoDistribucion != null) {
-            
-            if (fuente != null) {
-                
-                this.setBackground(Color.WHITE);
-                this.setLayout(tipoDistribucion);
-            
-                for (int i = 0; i < this.listaBotones.size(); i++) {
-
-                    if (this.tamañoBoton != null)
-                        this.listaBotones.get(i).setPreferredSize(this.tamañoBoton);
-                        
-                    this.listaBotones.get(i).setActionCommand(this.listaBotones.get(i).getText());
-                    this.listaBotones.get(i).setFont(fuente);
-                    this.add(this.listaBotones.get(i));
-
-                }
-                
-            } else
-                throw new IllegalArgumentException("Fuente nula");
-                
-        } else 
-            throw new IllegalArgumentException("Tipo Distribucion nula");
-            
-    }
-    
-    public void añadirBoton() { this.listaBotones.add(new JButton()); }
-    
     public void añadirBoton(String textoBoton) throws IllegalArgumentException{
         
         if (textoBoton != null && !textoBoton.isEmpty()) {
@@ -100,20 +65,6 @@ public class Botones extends JPanel{
             
         } else 
             throw new IllegalArgumentException("Nombre de botón nulo o vacío");
-            
-    }
-    
-    public void añadirBoton(String textoBoton, Font fuente) {
-        
-        if (textoBoton != null && !textoBoton.isEmpty()) {
-            
-            JButton boton = new JButton(textoBoton);
-            boton.setName(textoBoton);
-            boton.setFont(fuente);
-            this.listaBotones.add(boton);
-            
-        } else 
-            throw new IllegalArgumentException("Texto boton nulo o vacio");
             
     }
     
@@ -155,29 +106,9 @@ public class Botones extends JPanel{
         
     }
     
-    public void estabColorPred(Color color) {
-        
-        for (JButton boton : this.listaBotones) 
-            boton.setBackground(color);
-            
-    }
-    
-    public void estabBotonesConTamañoPred(int ancho, int alto){
-        
-        this.tamañoBoton = new Dimension(ancho, alto);
-        
-    }
-    
     public int obtCantBotones() { return this.listaBotones.size(); }
     
     public JButton obtenerBoton(int indice) { return this.listaBotones.get(indice); }
-    
-    public void estabFuentePred(Font fuente) {
-        
-        for (JButton boton : this.listaBotones) 
-            boton.setFont(fuente);
-        
-    }
     
     public void estabCursor(Cursor cursor) {
         

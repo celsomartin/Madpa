@@ -29,7 +29,7 @@ public class Fractura extends JFrame implements WindowListener,ActionListener{
     private Etiquetas panelFracturaBrazo;
     private Etiquetas panelFracturaCraneo;
     private Etiquetas panelFracturaNasal;
-     private ArrayList<Etiquetas> instAñad;
+    private ArrayList<Etiquetas> instAñad;
     
     public Fractura(JFrame ventPrin, ImageIcon icono) {
         this.setIconImage(icono.getImage());
@@ -87,7 +87,7 @@ public class Fractura extends JFrame implements WindowListener,ActionListener{
         this.panelFracturaBrazo.generarPanel(new GridLayout(numFil,1));
     }
     
-     private void crearPanelFracturaCraneo(){
+    private void crearPanelFracturaCraneo(){
         this.panelFracturaCraneo=new Etiquetas();
         
         String ruta ="BaseDeDatos\\Fracturas\\Craneo.txt";
@@ -97,7 +97,7 @@ public class Fractura extends JFrame implements WindowListener,ActionListener{
         this.panelFracturaCraneo.generarPanel(new GridLayout(numFil,1));
     }
      
-      private void crearPanelFracturaNasal(){
+    private void crearPanelFracturaNasal(){
         this.panelFracturaNasal=new Etiquetas();
         
         String ruta ="BaseDeDatos\\Fracturas\\Nasal.txt";
@@ -107,7 +107,7 @@ public class Fractura extends JFrame implements WindowListener,ActionListener{
         this.panelFracturaNasal.generarPanel(new GridLayout(numFil,1));
     }
       
-        private void crearPanelTipoFracturas() {
+    private void crearPanelTipoFracturas() {
         
         this.panelTipoFracturas = new Botones();
         
@@ -120,7 +120,7 @@ public class Fractura extends JFrame implements WindowListener,ActionListener{
         
     }
      
-          private void añadirListeners() {
+    private void añadirListeners() {
         
         for (int i = 0; i < this.panelTipoFracturas.obtCantBotones(); i++) {
             
@@ -130,7 +130,7 @@ public class Fractura extends JFrame implements WindowListener,ActionListener{
         
     }
        
-            private void removerInstruccion() {
+    private void removerInstruccion() {
         
         for (int i = 0; i < this.getContentPane().getComponentCount(); i++) {
             
@@ -148,7 +148,7 @@ public class Fractura extends JFrame implements WindowListener,ActionListener{
         
     }
             
-        @Override
+    @Override
     public void actionPerformed(ActionEvent e) {
         
         String botonEvento = e.getActionCommand();

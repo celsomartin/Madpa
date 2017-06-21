@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import madpa.logica.excepcion.ErrorGestionArchivoException;
-import madpa.logica.gestor.archivo.Archivo;
+import madpa.logica.gestor.Archivo;
 
 /**
  *
@@ -48,29 +48,6 @@ public class Etiquetas extends JPanel{
             
     }
     
-    public void generarPanel(LayoutManager tipoDist, Font fuente) throws IllegalArgumentException{
-        
-        if (tipoDist != null) {
-            
-            if (fuente != null) {
-                
-                this.setBackground(Color.WHITE);
-                this.setLayout(tipoDist);
-                
-                for (JLabel etiqueta : this.listaEtiquetas) {
-                    etiqueta.setFont(fuente);
-                    this.add(etiqueta);
-                    
-                }
-                
-            } else 
-                throw new IllegalArgumentException();
-                
-        } else
-            throw new IllegalArgumentException();
-            
-    }
-    
     public void generarPanel(LayoutManager tipoDist, Color colorFondo) throws IllegalArgumentException{
         
         if (tipoDist != null) {
@@ -91,31 +68,6 @@ public class Etiquetas extends JPanel{
         } else
             throw new IllegalArgumentException();
         
-    }
-    
-    public void añadirEtiqueta(String texto, Font fuente, int alin) throws IllegalArgumentException{
-        
-        if (texto != null) {
-            
-            if (!texto.isEmpty()) {
-                
-                if (fuente != null) {
-                    
-                    JLabel e = new JLabel(texto, alin);
-                    e.setName(texto);
-                    this.listaEtiquetas.add(e);
-                    e.setFont(fuente);
-                    this.listaEtiquetas.add(e);
-                    
-                } else
-                    throw new IllegalArgumentException("Fuente nula");
-                   
-            } else 
-                throw new IllegalArgumentException("Texto sin valor asociado");
-                
-        } else
-            throw new IllegalArgumentException("Texto nulo");
-            
     }
     
     public void añadirEtiqueta(String texto) {
@@ -168,12 +120,6 @@ public class Etiquetas extends JPanel{
         if (!this.listaEtiquetas.isEmpty())
             this.listaEtiquetas.clear();
             
-    }
-    
-    public boolean hayEtiquetas() {
-        
-        return !this.listaEtiquetas.isEmpty();
-        
     }
     
     public JPanel obtPanel() {

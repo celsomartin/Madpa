@@ -149,7 +149,7 @@ public class Herida extends JFrame implements ActionListener, WindowListener{
         
     }
     
-       private void removerInstruccion() {
+    private void removerInstruccion() {
         
         for (int i = 0; i < this.getContentPane().getComponentCount(); i++) {
             

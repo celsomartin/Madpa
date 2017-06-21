@@ -31,7 +31,6 @@ import madpa.logica.panelbasico.Etiquetas;
 public class Alergia extends JFrame implements WindowListener, ActionListener {
     
     private Botones panelTipoAlergia;
-    private Etiquetas panelSup;
     private Etiquetas panelHiedraVenenosa;
     private Etiquetas panelPasto;
     private Etiquetas panelOcular;
